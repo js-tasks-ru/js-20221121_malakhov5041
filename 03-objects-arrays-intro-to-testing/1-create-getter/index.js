@@ -4,5 +4,16 @@
  * @returns {function} - function-getter which allow get value from object by set path
  */
 export function createGetter(path) {
+  return function(obj) {
+    let newObj = obj;
+    const arr = path.split('.');
 
+    for (const key of arr) {
+      if (!newObj.hasOwnProperty(key)) {return;}
+
+      newObj = newObj[key];
+    }
+
+    return newObj;
+  };
 }
